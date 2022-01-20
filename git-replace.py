@@ -6,12 +6,12 @@ import re
 import shutil
 import datetime
 
-# Path to git repositories. Must be set
+# Path to git repositories. Must be set.
 git_repos_path = '/path/to/git/repositories'
 
-def replace_content(dict_replace, target):
-# Based on dict, replaces key with the value on the target.
 
+def replace_content(dict_replace, target):
+    # Based on dict, replaces key with the value on the target.
     for check, replacer in list(dict_replace.items()):
         target = re.sub(check, replacer, target)
     return target
@@ -29,7 +29,7 @@ credentials_file.close()
 
 original_strings_file = open("original_strings.txt", "r")
 original_strings = original_strings_file.read().splitlines()
-print ("List of original strings: ", original_strings)
+print("List of original strings: ", original_strings)
 original_strings_file.close()
 
 replaced_strings_file = open("replaced_strings.txt", "r")
@@ -37,7 +37,7 @@ replaced_strings = replaced_strings_file.read().splitlines()
 print ("Listf strings for replace:", replaced_strings)
 replaced_strings_file.close()
 
-"""Iterate over the original strings list 
+"""Iterate over the original strings list
 and the list with lines for replace into dictionary"""
 zip_iterator = zip(original_strings, replaced_strings)
 replace_dict = dict(zip_iterator)
@@ -64,17 +64,17 @@ for repo_url in repositories_list:
     files.sort()
 # Iterate over the list of files, processing each of them
     for file in files:
-        if not file.startswith('.') and  not os.path.isdir(file):
-            print ("Processing file: ", file)
+        if not file.startswith('.') and not os.path.isdir(file):
+            print("Processing file: ", file)
             tmp_file = 'tmp.txt'
             file_open = open(file, 'r')
-            tmp_file_open = open (tmp_file, 'w')
+            tmp_file_open = open(tmp_file, 'w')
             file_read = file_open.read()
             file_open.close()
-            new_content = replace_content (replace_dict, file_read)
-            tmp_file_open.write (new_content)
+            new_content = replace_content(replace_dict, file_read)
+            tmp_file_open.write(new_content)
             tmp_file_open.close()
-            shutil.move(tmp_file,file)
+            shutil.move(tmp_file, file)
     now = datetime.datetime.now()
     now = str(now.strftime("%Y-%m-%d %H:%M"))
     os.system("git add .")
