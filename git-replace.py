@@ -10,8 +10,8 @@ import datetime
 git_repos_path = '/path/to/git/repositories'
 
 def replace_content(dict_replace, target):
-
 # Based on dict, replaces key with the value on the target.
+
     for check, replacer in list(dict_replace.items()):
         target = re.sub(check, replacer, target)
     return target
@@ -37,14 +37,15 @@ replaced_strings = replaced_strings_file.read().splitlines()
 print ("Listf strings for replace:", replaced_strings)
 replaced_strings_file.close()
 
-# Iterate over the original strings list and the list with lines for replace into dictionary
+"""Iterate over the original strings list 
+and the list with lines for replace into dictionary"""
 zip_iterator = zip(original_strings, replaced_strings)
 replace_dict = dict(zip_iterator)
 print ("Replacement dictionary: ", replace_dict)
 
 # Main cycle, iterate over the list of repositories
 for repo_url in repositories_list:
-    repo = re.sub(r'^.+/([^/]+)$',r'\1',repo_url)
+    repo = re.sub(r'^.+/([^/]+)$', r'\1', repo_url)
     repo_path = git_repos_path + repo
     repo_path = repo_path.rstrip("\n")
     g = git.Git(repo_url)
@@ -52,7 +53,7 @@ for repo_url in repositories_list:
     try:
         os.stat(repo_path)
         os.chdir(repo_path)
-        g.pull('origin','main')
+        g.pull('origin', 'main')
     except:
         os.mkdir(repo_path)
         os.chdir(git_repos_path)
