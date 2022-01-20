@@ -11,7 +11,7 @@ git_repos_path = '/path/to/git/repositories'
 
 def replace_content(dict_replace, target):
 
-    #Based on dict, replaces key with the value on the target."""
+    #Based on dict, replaces key with the value on the target.
     for check, replacer in list(dict_replace.items()):
         target = re.sub(check, replacer, target)
     return target
