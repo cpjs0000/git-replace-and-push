@@ -34,7 +34,7 @@ original_strings_file.close()
 
 replaced_strings_file = open("replaced_strings.txt", "r")
 replaced_strings = replaced_strings_file.read().splitlines()
-print ("Listf strings for replace:", replaced_strings)
+print ("List strings for replace:", replaced_strings)
 replaced_strings_file.close()
 
 """Iterate over the original strings list
